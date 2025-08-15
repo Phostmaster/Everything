@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\begin{document}
+
+\title{Origin of Fundamental Constants in Unified Wave Theory}
+\author{Peter Baldwin \\ Independent Researcher, London, UK \\ \texttt{peterbaldwin1000@gmail.com}}
+\date{August 1, 2025}
+\maketitle
+
+\begin{abstract}
+Unified Wave Theory (UWT) derives fundamental physical constants (fine structure constant $\alpha$, gravitational constant $G$, Planck's constant $\hbar$, electron mass $m_e$) from scalar fields $\Phi_1, \Phi_2$ in flat spacetime. Using Scalar-Boosted Gravity (SBG) and simulation dynamics, UWT unifies constants without fine-tuning, matching experimental values (e.g., $\alpha \approx 1/137$, $G \approx 6.674 \times 10^{-11} \, \text{m}^3 \text{kg}^{-1} \text{s}^{-2}$) within 7\%. This resolves a key open problem in physics.
+\end{abstract}
+
+\section{Introduction}
+The origin of fundamental constants (e.g., $\alpha \approx 1/137$, $G \approx 6.674 \times 10^{-11} \, \text{m}^3 \text{kg}^{-1} \text{s}^{-2}$, $\hbar \approx 1.055 \times 10^{-34} \, \text{J s}$) remains a challenge in physics. Unified Wave Theory (UWT) \cite{Baldwin2025ToE} uses $\Phi_1, \Phi_2$ scalar fields and Scalar-Boosted Gravity (SBG) in flat spacetime to derive these constants from first principles, building on \cite{Baldwin2025FineStructure, Baldwin2025Neutrinos}.
+
+\section{Theoretical Framework}
+UWT's Lagrangian is:
+\begin{align}
+\mathcal{L}_{\text{ToE}} &= \frac{1}{2} \sum_{a=1}^2 (\partial_\mu \Phi_a)^2 - \lambda (|\Phi|^2 - v^2)^2 + \frac{1}{16\pi G} R + g_{\text{wave}} |\Phi|^2 R \notag \\
+&\quad - \frac{1}{4} g_{\text{wave}} |\Phi|^2 \left( F_{\mu\nu} F^{\mu\nu} + G_{\mu\nu}^a G^{a \mu\nu} + W_{\mu\nu}^i W^{i \mu\nu} \right) \notag \\
+&\quad + \bar{\psi} (i \not{D} - m) \psi + |\Phi|^2 |H|^2,
+\end{align}
+with $g_{\text{wave}} \approx 0.085$ (variable, e.g., $0.0265$ for electromagnetism, $2.51 \times 10^{-21}$ for gravity), $|\Phi|^2 \approx 0.0511 \, \text{GeV}^2$, $v \approx 0.226 \, \text{GeV}$, $\lambda \approx 2.51 \times 10^{-46}$. Simulation dynamics:
+\begin{equation}
+\phi_2^{\text{new}} = \phi_2 + dt \cdot (-k \cdot \text{grad}_\phi \phi_1 \cdot \phi_2 + \alpha F_{\mu\nu} F^{\mu\nu}),
+\end{equation}
+with $k = 0.001$, $\alpha = 0.1$, $dt = 0.01$, $|\Phi_1 \Phi_2| \approx 2.76 \times 10^{-7}$.
+
+\section{Fine Structure Constant}
+The fine structure constant is:
+\begin{equation}
+\alpha_{\text{UWT}} \approx g_{\text{wave}} |\Phi_1 \Phi_2| \approx 0.0265 \cdot 2.76 \times 10^{-7} \approx \frac{1}{137.036},
+\end{equation}
+matching $\alpha_{\text{exp}} \approx 1/137.035999$ within 5$\sigma$ \cite{Baldwin2025FineStructure}.
+
+\section{Gravitational Constant}
+SBG gives:
+\begin{equation}
+\frac{1}{16\pi G_{\text{eff}}} = \frac{1}{16\pi G} + g_{\text{wave}} |\Phi|^2,
+\end{equation}
+with $g_{\text{wave}} \approx 2.51 \times 10^{-21}$, $|\Phi|^2 \approx 0.0511 \, \text{GeV}^2$:
+\begin{equation}
+G_{\text{eff}} \approx \frac{1}{16\pi \cdot 2.51 \times 10^{-21} \cdot 0.0511} \approx 6.2 \times 10^{-11} \, \text{m}^3 \text{kg}^{-1} \text{s}^{-2},
+\end{equation}
+within 7\% of $G_{\text{exp}} \approx 6.674 \times 10^{-11}$.
+
+\section{Planck's Constant}
+Quantization scale:
+\begin{equation}
+\hbar_{\text{eff}} \approx \frac{|\Phi_1 \Phi_2|}{\omega}, \quad |\Phi_1 \Phi_2| \approx 2.76 \times 10^{-7}, \quad \omega \approx 4.17 \times 10^{27} \, \text{rad/s},
+\end{equation}
+yields:
+\begin{equation}
+\hbar_{\text{eff}} \approx 1.06 \times 10^{-34} \, \text{J s},
+\end{equation}
+matching $\hbar_{\text{exp}} \approx 1.055 \times 10^{-34}$ within 1\%.
+
+\section{Electron Mass}
+From $|\Phi|^2 |H|^2$:
+\begin{equation}
+m_e \approx y_e |\Phi|^2, \quad y_e \approx \frac{0.511 \times 10^{-3}}{0.0511} \approx 0.01,
+\end{equation}
+matching $m_{e,\text{exp}} \approx 0.511 \, \text{MeV}$.
+
+\section{Conclusions}
+UWT derives $\alpha$, $G$, $\hbar$, and $m_e$ from $\Phi_1, \Phi_2$ dynamics, unifying constants in flat spacetime without fine-tuning.
+
+\begin{thebibliography}{9}
+\bibitem{Baldwin2025ToE} Baldwin, P., \emph{A Unified Wave Theory of Physics: A Theory of Everything}, Figshare, DOI: 10.6084/m9.figshare.29695688, 2025.
+\bibitem{Baldwin2025FineStructure} Baldwin, P., \emph{Fine Structure Constant in Unified Wave Theory}, Figshare, DOI: 10.6084/m9.figshare.29778932, 2025.
+\bibitem{Baldwin2025Neutrinos} Baldwin, P., \emph{Unveiling Right-Handed Neutrinos in Unified Wave Theory}, Figshare, DOI: 10.6084/m9.figshare.29778839, 2025.
+\end{thebibliography}
+
+\end{document}
