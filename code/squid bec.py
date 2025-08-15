@@ -48,4 +48,5 @@ plt.show()
 
 # Check Δm/m
 for k_wave, epsilon, delta_m in results:
+
     print(f"k_wave={k_wave:.5f}, ε={epsilon:.0e}, Average Δm/m: {np.mean(delta_m) / mass}")
