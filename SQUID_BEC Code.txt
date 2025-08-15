@@ -1,0 +1,51 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+L, dx = 1.0, 0.0001
+x = np.arange(-1, 1 + dx, dx)
+t_steps, g_wave = 100000, 19.5
+k_waves = [0.0023, 0.00235, 0.0024]
+epsilons = [1e-30, 1e-28]
+phi1 = 0.00095 * np.exp(-(x / L)**2)
+phi2 = 0.5 * np.sin(0.00235 * x)
+lambda_d, mass = 0.004, 0.001
+alpha = 10
+beta = 0.01
+results = []
+
+# Run for k_wave and epsilon
+for k_wave in k_waves:
+    for epsilon in epsilons:
+        phi1_temp = phi1.copy()
+        phi2_temp = phi2.copy()
+        delta_m = []
+        for t in range(t_steps):
+            grad_phi1 = np.gradient(phi1_temp, dx)
+            grad_phi2 = np.gradient(phi2_temp, dx)
+            norm = np.max(np.abs(phi1_temp * phi2_temp))
+            dt = 0.0001 / (1 + norm / 10) if norm > 0 else 0.0001
+            phi1_new = phi1_temp + dt * (-0.001 * grad_phi2 * phi1_temp + alpha * phi1_temp * phi2_temp * np.cos(k_wave * np.abs(x)))
+            phi2_new = phi2_temp + dt * (-0.001 * grad_phi1 * phi2_temp + alpha * phi1_temp * phi2_temp * np.cos(k_wave * np.abs(x)))
+            phi1_temp = np.clip(phi1_new, -1e5, 1e5)
+            phi2_temp = np.clip(phi2_new, -1e5, 1e5)
+            feedback = np.exp(-np.abs(x) / lambda_d)
+            phi1_phi2 = np.abs(phi1_temp * phi2_temp) * feedback
+            delta_m_t = epsilon * phi1_phi2**2 * mass
+            delta_m.append(np.mean(delta_m_t))
+        results.append((k_wave, epsilon, delta_m))
+
+# Plot
+plt.figure(figsize=(10, 6))
+for k_wave, epsilon, delta_m in results:
+    plt.plot(range(t_steps), delta_m, label=f'k={k_wave:.5f}, ε={epsilon:.0e}')
+plt.title('UWT Antigravity: Mass Reduction vs. Time (α=10, Evolving Φ₁, Φ₂)')
+plt.xlabel('Time Steps')
+plt.ylabel('Mass Reduction (kg)')
+plt.grid(True)
+plt.legend()
+plt.show()
+
+# Check Δm/m
+for k_wave, epsilon, delta_m in results:
+    print(f"k_wave={k_wave:.5f}, ε={epsilon:.0e}, Average Δm/m: {np.mean(delta_m) / mass}")

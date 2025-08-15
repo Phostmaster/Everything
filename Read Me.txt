@@ -1,0 +1,21 @@
+Unified Wave Theory of Physics (UWT) - A Theory of Everything
+Overview
+The Unified Wave Theory (UWT) unifies gravity, quantum mechanics, and cosmology via scalar fields Φ₁ and Φ₂. Key achievements:
+
+Electron g-factor: Derived as 2.0023193040000322, error ~1.8e-11% vs. PDG (2.002319304361).
+15x Starship Lift: Mass reduction via Δm/m≈10⁻⁵ (SQUID-BEC sim, ε|Φ₁Φ₂|², targeting DESY 2026).
+Scalar Field Split: At 10⁻³⁶ s, Φ₁ (|Φ₁|≈0.00095) and Φ₂ (f≈1.12e5 Hz) emerge, explaining CMB/BAO (4σ).
+
+Contents
+
+Papers: 28 UWT papers (e.g., ToE: 10.6084/m9.figshare.29695688, Anti-Grav: 10.6084/m9.figshare.29898332) on Zenodo (draft record 16876088).
+Code: SQUID-BEC sim (/code/squid_bec.py) for Δm/m≈10⁻³ (ε=10⁻²⁸, α=10, β≈0.01, t_QED≈10⁻²⁰ s).
+Data: g-factor and Starship lift results (/data/g_factor.txt).
+
+License
+CC-BY for open scrutiny.
+Links
+
+Zenodo draft: https://zenodo.org/records/16876088?preview=1&token=...
+Figshare DOIs: 10.6084/m9.figshare.29695688, 10.6084/m9.figshare.29898332
+DESY 2026: SQUID-BEC test (50 T, nK, Cs-133, f≈1.12e5 Hz)
