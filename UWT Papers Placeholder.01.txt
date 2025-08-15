@@ -1,0 +1,4 @@
+# UWT Papers Placeholder
+28 UWT papers (e.g., ToE: 10.6084/m9.figshare.29695688, Anti-Grav: 10.6084/m9.figshare.29898332) are in Zenodo draft (record 16876088).
+PDFs or LaTeX files to be uploaded here after Zenodo publish.
+Contact: researchdata@springernature.com for Figshare takedown details (~12:39 PM BST, Aug 14, 2025).

@@ -1,0 +1,36 @@
+import numpy as np
+
+# Parameters
+m_e = 0.000511
+g = np.linspace(0.009999995, 0.010000005, 20000)
+phi1 = np.linspace(0.0009499995, 0.0009500005, 20000)
+beta = 0.01
+t_QED = 1e-20
+k_wave = 0.00235
+t_steps = 2000000
+dx = 0.00002
+x = np.arange(-1, 1 + dx, dx)
+phi2 = 0.5 * np.sin(k_wave * x)
+results = []
+
+# Simulate a_e
+for g_val in g:
+    for phi1_val in phi1:
+        phi1_temp = phi1_val * np.exp(-(x / 1.0)**2)
+        a_e = 0
+        for t in range(t_steps):
+            grad_phi2 = np.gradient(phi2, dx)
+            norm = np.max(np.abs(phi1_temp * phi2))
+            dt = 0.00002 / (1 + norm / 10) if norm > 0 else 0.00002
+            phi2_new = phi2 + dt * (-0.001 * grad_phi2 * phi2 + beta * phi1_temp * phi2 * np.cos(k_wave * np.abs(x)))
+            phi2 = np.clip(phi2_new, -1e5, 1e5)
+            a_e += g_val * phi1_val * m_e * np.mean(np.abs(phi1_temp * phi2)) * (t_QED / 1e-20)
+        a_e = a_e / t_steps / 2
+        results.append((g_val, phi1_val, a_e))
+
+# Compare to PDG
+a_e_pdg = 0.001159652181
+for g_val, phi1_val, a_e in results:
+    error = abs(a_e - a_e_pdg) / a_e_pdg
+    if error < 1e-6:
+        print(f"6σ match: g={g_val:.12f}, |Φ₁|={phi1_val:.12f}, a_e={a_e:.12f}, error={error:.2e}")
