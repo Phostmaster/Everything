@@ -1,0 +1,1 @@
+epsilon=0.9115, Average delta_m/m: -9.004265244778698e+18, Energy: 4.02e+17 J/m³

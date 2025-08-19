@@ -1,0 +1,1 @@
+k_wave=0.00235, epsilon=0.9000, Average delta_m/m: 0.0009876336799824307

@@ -1,0 +1,1 @@
+k_wave=0.00235, epsilon=0.9115, Average delta_m/m: 8.158509875852561e-07, Energy: 5.77e+04 J/m³
