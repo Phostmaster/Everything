@@ -1,0 +1,31 @@
+\documentclass{article}
+\usepackage{booktabs}
+\begin{document}
+\begin{table}[h]
+\centering
+\caption{UWT Parameters for 1D and 2D/3D Solvers}
+\begin{tabular}{lcc}
+\toprule
+Parameter & 1D Value & 2D/3D Value \\
+\midrule
+$L$ (domain size, m) & 1.0 & 1.0 (r, z, x, y, z) \\
+$A$ (cross-sectional area, m²) & 0.1 & 0.1 \\
+$nx$, $nr$, $nz$ (grid points) & 100 & 64, 64 (2D); 32, 32, 32 (3D) \\
+$nt$ (time steps) & 1000 & 1000 \\
+$dt$ (s) & 1e-12 & 1e-12 \\
+$k$ (wave number) & 0.0047 & 0.0047 \\
+$\phi_1$ (phase) & 0.0 & 0.0 \\
+$\phi_2$ (phase) & $\pi/2$ & $\pi/2$ \\
+$g_{\text{wave}}$ & 5e-8 & 5e-8 \\
+$k_{\text{coupling}}$ & 1e-6 & 1e-6 \\
+$k_U$ & 2e8 & 2e8 \\
+$\rho$ (kg/m³) & 1000 & 1000 \\
+$\kappa$ & 5e5 & 5e5 \\
+$\alpha$ & 1.5 & 1.5 \\
+$k_{\text{damp}}$ & 0.001 & 0.001 \\
+$\theta$ (rad) & $\pi$ & $\pi$ \\
+$v$ & 0.226 / 6.242e18 & 0.226 / 6.242e18 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{document}
