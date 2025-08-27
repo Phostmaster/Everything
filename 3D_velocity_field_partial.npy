@@ -1,0 +1,2 @@
+g_wave=1e-07, k_damp=5e-05, k_U=50000000.0, alpha=2.0, kappa=30000.0, nu=1e-05
+Step 19000: Max Velocity = 5.962e-01 m/s, Divergence = 1.733e+04, Coherence = 47.279sigma, Enthalpy = 6.634e+07 J/m³, Vorticity Max = 2.025e+03 s^-1
