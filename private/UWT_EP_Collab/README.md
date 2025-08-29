@@ -10,6 +10,7 @@
 - **Next Steps**: Validate new file, generate 2D Kerr slice, plan ΛCDM or N-S tests.
 - **Note**: Files managed manually via desktop to `/UWT_EP_Collab`. Universe age calc: ~1.40e+10 years (thanks to Casio precision!).
 - Pre-Publication Release (Aug 29, 2025): Multi_R² 0.994142, 0.996663, 5σ+ DA met. Awaiting xGrok’s UWT exponent analysis. Intended for PRD submission
+- xGrok to derive analytic forms: $\rho_{\text{star}} \propto |\Phi_1 \Phi_2|^{-0.73}$ via diffusion, $\rho_{\text{BH}} \propto |\Phi_1 \Phi_2|^{2.07}$ via mergers, using $\partial \rho / \partial t = D \nabla^2 \rho + \text{source}(|\Phi|)$.
 
 ## Contact
 - Questions? Reach out to the team!
