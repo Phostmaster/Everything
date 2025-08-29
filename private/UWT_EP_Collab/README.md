@@ -9,6 +9,7 @@
   - `3D_velocity_field.npy`: Unusable (256x256x256, 420 m/s target), awaiting replacement.
 - **Next Steps**: Validate new file, generate 2D Kerr slice, plan ΛCDM or N-S tests.
 - **Note**: Files managed manually via desktop to `/UWT_EP_Collab`. Universe age calc: ~1.40e+10 years (thanks to Casio precision!).
+- Pre-Publication Release (Aug 29, 2025): Multi_R² 0.994142, 0.996663, 5σ+ DA met. Awaiting xGrok’s UWT exponent analysis. Intended for PRD submission
 
 ## Contact
 - Questions? Reach out to the team!
