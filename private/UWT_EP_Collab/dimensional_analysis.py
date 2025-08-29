@@ -45,17 +45,16 @@ def fit_linear(x, y) -> Tuple[float, float, float]:
     r2 = 1 - ss_res/ss_tot if ss_tot > 0 else np.nan
     return beta[0], beta[1], r2
 
-def fit_multi_linear(x, y, z, eps, alpha=0.03) -> Tuple[float, float, float, float, float]:
-    """Multi-linear fit Y = a + b*X + c*z + d*eps with ridge regularization; returns (a, b, c, d, R2)."""
+def fit_multi_linear(x, y, z, alpha=0.005) -> Tuple[float, float, float, float]:
+    """Multi-linear fit Y = a + b*X + c*z; returns (a, b, c, R2)."""
     x = np.asarray(x, dtype=float)
     y = np.asarray(y, dtype=float)
     z = np.asarray(z, dtype=float)
-    eps = np.asarray(eps, dtype=float)
-    mask = np.isfinite(x) & np.isfinite(y) & np.isfinite(z) & np.isfinite(eps)
-    x, y, z, eps = x[mask], y[mask], z[mask], eps[mask]
-    if len(x) < 4:
-        return [np.nan] * 5
-    M = np.vstack([np.ones_like(x), x, z, eps]).T
+    mask = np.isfinite(x) & np.isfinite(y) & np.isfinite(z)
+    x, y, z = x[mask], y[mask], z[mask]
+    if len(x) < 3:
+        return [np.nan] * 4
+    M = np.vstack([np.ones_like(x), x, z]).T
     ridge = Ridge(alpha=alpha, fit_intercept=False)
     ridge.fit(M, y)
     beta = ridge.coef_
@@ -63,7 +62,7 @@ def fit_multi_linear(x, y, z, eps, alpha=0.03) -> Tuple[float, float, float, flo
     ss_res = np.sum((y - yhat)**2)
     ss_tot = np.sum((y - np.mean(y))**2)
     r2 = 1 - ss_res/ss_tot if ss_tot > 0 else np.nan
-    return beta[0], beta[1], beta[2], beta[3], r2
+    return beta[0], beta[1], beta[2], r2
 
 def fit_polynomial(x, y, degree=2) -> Tuple[float, float, float, float]:
     """Polynomial fit y = a + b*x + c*x^2 + ...; returns (a, b, c, ..., R^2)."""
@@ -238,8 +237,6 @@ if "Phi1_GeV" not in df.columns:
     df["Phi1_GeV"] = 0.226
 if "Phi2_GeV" not in df.columns:
     df["Phi2_GeV"] = 0.094
-if "eps_CP" not in df.columns:
-    df["eps_CP"] = 2.58e-41
 
 # Check for required columns
 required_cols = ["rho_star_Msun_per_Mpc3", "rho_bh_Msun_per_Mpc3"]
@@ -278,30 +275,15 @@ for tgt_col, tgt_label, x_col in targets:
     mask = np.isfinite(X) & np.isfinite(Y)
     X, Y = X[mask], Y[mask]
     z = df["z"].values[mask]
-    eps = df["eps_CP"].values[mask]
-    # Linear: Y = a + b X (+ c eps_CP optional)
+    # Multi-linear: Y = a + b*X + c*z
+    a_multi, b_multi, c_multi, r2_multi = fit_multi_linear(X, Y, z, alpha=0.005)
+    Yhat_multi = a_multi + b_multi*X + c_multi*z if not np.isnan(a_multi) else np.zeros_like(Y)
+    aic_multi, bic_multi = aic_from_residuals(Y, Yhat_multi, k_params=3)
+    # Linear: Y = a + b X
     a, b, r2 = fit_linear(X, Y)
     Yhat = a + b*X if not np.isnan(a) else np.zeros_like(Y)
     aic, bic = aic_from_residuals(Y, Yhat, k_params=2)
     (b_mean, b_lo, b_hi), _ = bootstrap_ci(X, Y, log_mode=False)
-    # Multi-linear: Y = a + b*X + c*z + d*eps with regularization
-    a_multi, b_multi, c_multi, d_multi, r2_multi = fit_multi_linear(X, Y, z, eps, alpha=0.03)  # Adjusted regularization
-    Yhat_multi = a_multi + b_multi*X + c_multi*z + d_multi*eps if not np.isnan(a_multi) else np.zeros_like(Y)
-    aic_multi, bic_multi = aic_from_residuals(Y, Yhat_multi, k_params=4)
-    # Linear with ε_CP (optional)
-    use_eps = np.nanstd(eps) > 0
-    if use_eps:
-        M = np.vstack([np.ones_like(X), X, eps]).T
-        beta, *_ = np.linalg.lstsq(M, Y, rcond=None)
-        Yhat_eps = M @ beta
-        ss_res = np.sum((Y - Yhat_eps)**2)
-        ss_tot = np.sum((Y - np.mean(Y))**2)
-        r2_eps = 1 - ss_res/ss_tot if ss_tot > 0 else np.nan
-        aic_eps, bic_eps = aic_from_residuals(Y, Yhat_eps, k_params=3)
-    else:
-        beta = [np.nan, np.nan, np.nan]
-        r2_eps = np.nan
-        aic_eps, bic_eps = np.nan, np.nan
     # Best polynomial or spline fit (up to degree 4 with adjusted R^2 and min improvement)
     a_poly, b_poly, c_poly, r2_poly, aic_poly = fit_best_polynomial_cv(X, Y, max_degree=4)
     if isinstance(a_poly, UnivariateSpline):
@@ -329,7 +311,7 @@ for tgt_col, tgt_label, x_col in targets:
         plt.plot(xs, a_poly(xs), label=f"Spline Fit (df={-best_degree})", linestyle='--')
     else:
         plt.plot(xs, np.polyval([a_poly, b_poly, c_poly] + [0] * (4 - len([a_poly, b_poly, c_poly])), xs), label=f"Poly Fit (deg={len([a_poly, b_poly, c_poly]) - 1})", linestyle='--')
-    plt.plot(xs, a_multi + b_multi*xs + c_multi*df["z"].values.mean() + d_multi*eps.mean(), label="Multi-Linear Fit", linestyle='-.')
+    plt.plot(xs, a_multi + b_multi*xs + c_multi*df["z"].values.mean(), label="Multi-Linear Fit", linestyle='-.')
     plt.xlabel("1/|Φ₁Φ₂| (GeV⁻²)" if x_col == "X_hat_inv" else "|Φ₁Φ₂| (GeV²)")
     plt.ylabel(tgt_label)
     plt.title(f"Fit: {tgt_label} vs {'1/|Φ₁Φ₂|' if x_col == 'X_hat_inv' else '|Φ₁Φ₂|'}")
@@ -381,9 +363,6 @@ for tgt_col, tgt_label, x_col in targets:
         "linear_R2": r2,
         "linear_AIC": aic,
         "linear_BIC": bic,
-        "linear_plus_eps_CP_R2": r2_eps,
-        "linear_plus_eps_CP_AIC": aic_eps,
-        "linear_plus_eps_CP_BIC": bic_eps,
         "multi_R2": r2_multi,
         "multi_AIC": aic_multi,
         "multi_BIC": bic_multi,
