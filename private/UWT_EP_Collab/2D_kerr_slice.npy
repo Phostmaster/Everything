@@ -1,0 +1,7 @@
+import numpy as np
+file_path = r"C:\Users\admin\Desktop\private\UWT_EP_Collab\3D_velocity_field.npy"
+u_field = np.load(file_path)
+z_mid = u_field.shape[2] // 2
+u_slice = u_field[:, :, z_mid]
+np.save(r"C:\Users\admin\Desktop\private\UWT_EP_Collab\2D_kerr_slice.npy", u_slice)
+print(f"2D Slice Shape: {u_slice.shape}, Max Velocity: {np.max(u_slice):.3e} m/s")

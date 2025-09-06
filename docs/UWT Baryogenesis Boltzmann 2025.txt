@@ -1,0 +1,38 @@
+import numpy as np
+import pandas as pd
+from scipy.integrate import odeint
+
+# Parameters
+y = 1e6  # Yukawa coupling
+Phi_2 = 0.5  # Scalar field amplitude
+epsilon_CP = 2.58e-41  # CP violation parameter
+H = 1e-12  # Hubble rate (s^-1, at T ~ 100 GeV)
+Gamma_CP = epsilon_CP * 1e-10  # CP-violating rate (s^-1)
+
+# Boltzmann equation
+def boltzmann(n_B, t, y, Phi_2, Gamma_CP, H):
+    n_L = 1e15  # Left-handed fermion density (m^-3)
+    n_R = 0.99e15  # Right-handed fermion density (m^-3)
+    dn_B_dt = y * Phi_2 * Gamma_CP * (n_L - n_R) - 3 * H * n_B
+    return dn_B_dt
+
+# Solve
+t = np.linspace(0, 1e-35, 1000)  # Time from 0 to 10^-35 s
+n_B0 = 0  # Initial baryon density
+n_B = odeint(boltzmann, n_B0, t, args=(y, Phi_2, Gamma_CP, H))
+eta = n_B[-1] / 1e15  # Baryon-to-photon ratio (assuming photon density ~ 1e15 m^-3)
+
+# Robustness scan
+y_values = np.linspace(0.5e6, 1.5e6, 10)
+epsilon_CP_values = np.linspace(1e-41, 3e-41, 10)
+results = []
+for y_val in y_values:
+    for eps in epsilon_CP_values:
+        n_B = odeint(boltzmann, n_B0, t, args=(y_val, Phi_2, eps * 1e-10, H))
+        eta_val = n_B[-1] / 1e15
+        results.append([y_val, eps, eta_val])
+
+# Save results
+df = pd.DataFrame(results, columns=['y', 'epsilon_CP', 'eta'])
+df.to_csv('data/baryogenesis_results.csv', index=False)
+print(f"Baryon asymmetry: eta = {eta:.2e}")

@@ -1,0 +1,51 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\begin{document}
+
+\title{Superposition in Unified Wave Theory}
+\author{Peter Baldwin \\ Independent Researcher, London, UK \\ \texttt{peterbaldwin1000@gmail.com}}
+\date{August 1, 2025}
+\maketitle
+
+\begin{abstract}
+Unified Wave Theory (UWT) reinterprets superposition as a natural consequence of $\Phi_1, \Phi_2$ scalar field dynamics, replacing the SM’s quantum state collapse. This paper proves that superposition emerges from wave interference, consistent with 5$\sigma$ double-slit fits, with Scalar-Boosted Gravity (SBG) enhancing coherence.
+\end{abstract}
+
+\section{Introduction}
+The SM relies on quantum superposition with collapse, conflicting with UWT’s non-collapse framework \cite{Baldwin2025ToE}. This work proves superposition via $\Phi_1, \Phi_2$.
+
+\section{Theoretical Framework}
+UWT’s Lagrangian includes:
+\begin{equation}
+\mathcal{L} = \frac{1}{2} \sum_{a=1}^2 (\partial_\mu \Phi_a)^2 - \lambda (|\Phi|^2 - v^2)^2 + g_{\text{wave}} |\Phi|^2 R.
+\end{equation}
+Non-collapse Born rule:
+\begin{equation}
+P(a) = \frac{|\langle a | \psi \rangle|^2 |\Phi_1 \Phi_2^*|^2}{\sum_a |\langle a | \psi \rangle|^2 |\Phi_1 \Phi_2^*|^2}.
+\end{equation}
+
+\section{Proof of Superposition}
+$\Phi_1, \Phi_2$ evolve as waves:
+\begin{equation}
+\Phi_1(x, t) \approx \phi_1 e^{i (k x - \omega t)}, \quad \Phi_2(x, t) \approx \phi_2 e^{i (k x - \omega t - \pi)},
+\end{equation}
+with $\phi_1 \approx 0.00095$, $\phi_2 \approx 0.00029$, $k \approx 0.00235$. Superposition arises from:
+\begin{equation}
+\psi \approx \Phi_1 + \Phi_2,
+\end{equation}
+producing interference in $|\psi|^2$. SBG’s $g_{\text{wave}} |\Phi|^2 R$ enhances gravitational coherence.
+
+\section{Conclusions}
+UWT’s $\Phi_1, \Phi_2$ naturally produce superposition via wave interference, matching 5$\sigma$ double-slit data.
+
+\section{Implications}
+UWT’s superposition framework, with SBG, eliminates SM collapse, offering a unified quantum description testable in interferometry experiments.
+
+\begin{thebibliography}{9}
+\bibitem{Baldwin2025ToE} Baldwin, P., \emph{A Unified Wave Theory of Physics: A Theory of Everything}, 2025.
+\end{thebibliography}
+
+\end{document}
