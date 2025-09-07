@@ -1,0 +1,24 @@
+# Hypothesis 2A: 1D standing-wave A_f = A0 * sin(n π L / λ)
+def compute_Af_2a(params):
+    A0, L, lambda_wave = params
+    Af = {}
+    for name in particle_list:
+        if name in gen_map:
+            n = gen_map[name]
+        elif name in flav_map:
+            n = flav_map[name]
+        else:
+            n = boson_map[name]
+        Af[name] = A0 * np.sin(n * np.pi * L / lambda_wave) if n > 0 else 0
+    return Af
+
+x0_2a = [1e5, 1.0, 1.0]
+res_2a = least_squares(lambda params: residuals(params, compute_Af_2a), x0_2a, bounds=([0.0,0.0,0.0], [np.inf, np.inf, np.inf]))
+params_2a = res_2a.x
+Af_2a = compute_Af_2a(params_2a)
+pred_2a = np.array([unscaled_delta_m * Af_2a[name] * 1000.0 for name in particle_list])
+chi2_2a = np.sum(((pred_2a - obs_masses_MeV) / sigma)**2)
+dof_2a = len(obs_masses_MeV) - len(params_2a)
+print("Hypothesis 2A: 1D standing-wave A_f = A0 * sin(n π L / λ)")
+print(f"Fitted A0 = {params_2a[0]:.3e}, L = {params_2a[1]:.3f}, λ = {params_2a[2]:.3f}")
+print(f"Chi2 = {chi2_2a:.2f}, dof = {dof_2a}, reduced chi2 = {chi2_2a/dof_2a:.3f}\n")
