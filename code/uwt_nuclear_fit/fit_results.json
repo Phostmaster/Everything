@@ -1,0 +1,11 @@
+{
+  "model": "power",
+  "alpha_hat": -3.5257992359039037e-10,
+  "alpha_err_curvature": 1.0106681381404721e-09,
+  "chi2": 0.12170208061014036,
+  "dof": 35,
+  "chi2_reduced": 0.0034772023031468674,
+  "bootstrap_CI_16_84": null,
+  "n_points": 36,
+  "data": "C:\\Users\\admin\\Desktop\\UWTMain\\Everything\\code\\nuclei.csv"
+}
