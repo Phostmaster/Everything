@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: "Unified Wave Theory: Complete Research Suite"
+message: "If you use this work, please cite it as below."
+authors:
+  - family-names: Baldwin
+    given-names: Peter
+    affiliation: Independent Researcher
+version: "2025.10"
+doi: "10.6084/m9.figshare.29695688"
+date-released: "2025-10-05"
+repository-code: "https://github.com/Phostmaster/Everything"
+license: MIT
