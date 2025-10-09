@@ -1,1 +1,1 @@
-
+- `/notes`: Educational snippets (e.g., "How Does UWT Explain Particle Spin?") for public understanding, numbered 01-24.
