@@ -5,10 +5,11 @@ This repository consolidates the Unified Wave Theory (UWT), a flat-space physics
 
 ## Directory Structure
 - `/data`: Raw simulation outputs (logs, masses, comms data).
+- `/docs`: Papers, notes, and lab test setups (e.g., Bullet Cluster lensing, cosmology likelihood, dynamo/quantum_computing/superconductivity/turbine setups).
 - `/plots`: Generated figures (e.g., redshift evolution, fusion divergence).
 - `/code`: Source files (e.g., BH sim, flavor sim, redshift code).
-- `/docs`: Papers, notes (e.g., Bullet Cluster lensing, cosmology likelihood).
-- `/backups`: Archived versions.
+- `/archive`: Archived versions.
+- `/notes`: Miscellaneous notes.
 
 ## Getting Started
 1. Clone the repo: `git clone https://github.com/Phostmaster/Everything.git`
