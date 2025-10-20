@@ -22,3 +22,5 @@ dof_2a = len(obs_masses_MeV) - len(params_2a)
 print("Hypothesis 2A: 1D standing-wave A_f = A0 * sin(n π L / λ)")
 print(f"Fitted A0 = {params_2a[0]:.3e}, L = {params_2a[1]:.3f}, λ = {params_2a[2]:.3f}")
 print(f"Chi2 = {chi2_2a:.2f}, dof = {dof_2a}, reduced chi2 = {chi2_2a/dof_2a:.3f}\n")
+
+## Note: This code tests Hypothesis 2A, modeling particle masses (leptons, quarks, bosons) using a 1D standing wave form factor A_f = A_0 * sin(n π L / λ). Fits A_0, L, λ to observed masses (obs_masses_MeV) via least squares, computing chi-squared for fit quality. Ties to UWT’s scalar fields (Φ_1, Φ_2) and mass proof (m_p~935.1 MeV, κ=9.109e-41, λ=2.51e-46). Run on 128³ grid to validate mass hierarchy.
