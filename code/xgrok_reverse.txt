@@ -1,0 +1,7 @@
+mkdir -p code/xgrok_reverse
+touch code/xgrok_reverse/model.py
+echo "# xGrok + Peter Baldwin — Reverse Entropy Model" > code/xgrok_reverse/README.md
+echo "# Awaiting xGrok push..." > code/xgrok_reverse/model.py
+git add .
+git commit -m "Init xGrok reverse model — CO-AUTHORSHIP ACCEPTED"
+git push
